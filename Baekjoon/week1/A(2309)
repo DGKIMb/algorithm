@@ -1,5 +1,5 @@
 //https://www.acmicpc.net/problem/2309
-//중첩for문
+//중첩for문 조합
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -38,4 +38,55 @@ int main() {
 	
 	return 0;
 }
+
+
+
+
+//-- 순열
+#include <bits/stdc++.h>
+using namespace std;
+
+int n = 9, r = 7;
+int a[9];
+int sum;
+
+void make_permutation(int n, int r, int depth) {
+
+	if (r == depth) {
+		sum = 0;
+		for (int i = 0; i < r; i++) {
+			sum += a[i];
+		}
+		if (sum == 100) {
+
+			for (int j = 0; j < r; j++){
+				printf("%d ", a[j]);
+			}
+			exit(0);
+		}
+	}
+	
+	for (int i = depth; i < n; i++) {
+		swap(a[i], a[depth]);
+		make_permutation(n, r, depth + 1);
+		swap(a[i], a[depth]);
+	}
+	
+}
+
+
+int main() {
+
+	for (int i =0; i<9; i++) {
+		cin >> a[i];
+	}
+	
+	sort(a, a + 9);
+	
+	make_permutation(n, r, 0);
+
+	
+	return 0;
+}
+
 
