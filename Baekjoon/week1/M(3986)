@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// 문제가 짝짓기나 폭발이면 스택을 생각해보자.
+
 int n, ret;
 string s;
 
