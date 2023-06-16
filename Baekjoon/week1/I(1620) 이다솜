@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//https://www.acmicpc.net/problem/1620
+
 int n, m;
 string s;
 map<string, int> mp;
