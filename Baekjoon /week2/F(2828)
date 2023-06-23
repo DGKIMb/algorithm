@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int n,m,j;
+int ap;
+int r,l;
+
+int cnt;
+
+int main() {
+
+	cin >> n >> m;
+	cin >> j;
+	
+	l = 1;
+	r = l + m - 1;
+
+	for (int i=0; i<j; i++) {
+		cin >> ap;
+		
+		if (ap <= r && ap >= l) {
+			continue;
+		}
+		else if (ap > r) {
+			cnt += ap - r;
+			l += ap - r;
+			r += ap - r;
+		}
+		else if (ap < l) {
+			cnt += l - ap;
+			r -= l - ap;
+			l -= l - ap;
+		}
+	}
+	
+	cout << cnt << "\n";
+
+	return 0;
+}	
