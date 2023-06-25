@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define prev a
+
+int num, n;
+int cnt1, cnt2;
+int m, s, prev;
+int t1, t2;
+
+
+int main() {
+	
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+	
+	cin >> num;
+	for (int i=0; i<num; i++) {
+		scanf("%d", &n);
+		scanf("%d:%d", &m, &s);
+		
+		if (cnt1 > cnt2) {
+			t1 += m*60 + s - prev;
+		}
+		else if (cnt1 < cnt2) {
+			t2 += m*60 + s - prev;
+		}
+				 			
+		prev = m*60 + s;	 			
+		n == 1 ? cnt1++ : cnt2++;
+	}
+	if (cnt1 > cnt2) {
+		t1 += 48*60 - prev;
+	}
+	else if (cnt1 < cnt2) {
+		t2 += 48*60 - prev;
+	}
+	
+	
+	printf("%02d:%02d\n", t1/60, t1%60);
+	printf("%02d:%02d\n", t2/60, t2%60);
+	
+
+	return 0;
+}
+
