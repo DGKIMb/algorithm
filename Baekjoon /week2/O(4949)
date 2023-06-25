@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int n;
+string s;
+int f;
+
+int main() {
+	
+	while (1) {
+		getline(cin, s);
+		stack<char> stk;
+		f=0;
+		if (s == ".") {
+			break;
+		}
+		for (int i=0; i<s.size(); i++) {
+			if (s[i] == '(' || s[i] == '[') {
+				stk.push(s[i]);
+			}
+			else if (s[i] == ')') {
+				if (stk.size() == 0 || stk.top() != '(') {
+					f=1;
+					break;
+				}
+				stk.pop();
+			}
+			else if (s[i] == ']') {
+				if (stk.size() == 0 || stk.top() != '[') {
+					f=1;
+					break;
+				}
+				stk.pop();
+			}
+		}
+		
+		if (stk.size() || f == 1) {
+				cout << "no\n";
+			}
+			else {
+				cout << "yes\n";
+			}
+	}
+
+
+	return 0;
+}
+
