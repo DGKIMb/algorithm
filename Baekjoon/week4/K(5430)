@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int const INF = 987654321;
+
+int t,n,num;
+string s;
+
+
+int main() { 
+	
+	cin >> t;
+	for (int o=0; o<t; o++) {
+		cin >> s;
+		cin >> n;
+		deque<int> dq;
+		string tmp;
+		int sum = 0, f=0;
+		cin >> tmp;
+		for (int i=0; i<tmp.size(); i++) {
+        	if(tmp[i] == '[' || tmp[i] == ']') continue;
+            if(tmp[i] >= '0' && tmp[i] <= '9') sum = sum*10 + tmp[i]-'0';
+            else{
+                if(sum > 0) dq.push_back(sum);
+                sum = 0; 
+            }
+		}
+		if (sum > 0) dq.push_back(sum);
+		
+
+		bool error = false, rev = false;
+ 		for(char a : s){
+ 			if(a == 'R') rev = !rev; 
+ 			else{
+                // 비어있는데 제거하려 하면 에러
+                if(dq.empty()){
+                    error = true;
+                    break;
+                }
+                if(rev) dq.pop_back();
+                else dq.pop_front(); 
+			}
+		}
+		
+        if(error) cout << "error" << '\n';
+        // 아닐 경우 덱의 원소를 하나하나 출력
+        else{
+        	cout << "["; 
+            // 덱이 뒤집힌 상태면 진짜로 뒤집어 준다.
+            if(rev) reverse(dq.begin(), dq.end());
+            for(int i = 0; i < dq.size(); i++){
+        		cout << dq[i];  
+                if(i < dq.size()-1) cout << ",";
+            }
+        	cout << "]\n";  
+        }
+ 		
+ 		
+	}
+	
+
+    return 0;
+}
