@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int const INF = 987654321;
+
+string s, ret;
+string com;
+
+int main() {
+
+	cin >> s;
+	cin >> com;
+	
+	for (int i=0; i<s.size(); i++) {
+		ret += s[i];
+		if (ret.size() >= com.size()) {
+			if (ret.substr(ret.size()-com.size()) == com) {
+				ret.erase(ret.size()-com.size());
+			}
+		}
+	}
+	if (ret.size()) cout << ret;
+	else cout << "FRULA";
+	
+	
+	
+    return 0; 
+}
