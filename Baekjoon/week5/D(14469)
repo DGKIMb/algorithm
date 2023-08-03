@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int const INF = 987654321;
+
+int n, from, to, ret;
+vector<pair<int,int>> v;
+
+int main() {
+	
+	cin >> n;
+	for (int i=0; i<n; i++) {
+		cin >> from >> to;
+		v.push_back({from,to});
+	}
+	
+	sort(v.begin(), v.end());
+	
+	from = v[0].first;
+	to = v[0].second + from;
+	ret = to;
+	
+	for (int i=1; i<n; i++) {
+		if (v[i].first >= to) {
+			from = v[i].first;
+			to = v[i].second + from;
+			ret = to;
+			continue;
+		}
+		from = to;
+		to = from + v[i].second;
+		ret = to;
+	}
+	
+	cout << ret;
+	
+	
+	
+    return 0; 
+}
