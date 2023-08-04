@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int const INF = 987654321;
+
+bool check[100001];
+ll a[100001], s,e,ret,n;
+ 
+int main(){
+	
+    scanf("%d", &n);
+    for(int i = 0; i < n; i++){
+        scanf("%lld", a + i);
+    }
+    
+    while(e < n){
+        if(!check[a[e]]){
+            check[a[e]] = 1;
+            e++;
+        }else{
+            ret += (e - s);
+            check[a[s]] = 0;
+            s++;
+        }
+    }
+    
+    ret += (long long)(e - s) * (e - s + 1) / 2;
+    printf("%lld\n", ret);
+    
+    return 0;
+}
+
