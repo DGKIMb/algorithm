@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int const INF = 987654321;
+
+int n, k, ret;
+int a[101];
+bool check[101];
+vector<int> v;
+
+int main(){
+	
+
+	cin >> n >> k;
+	for (int i=0; i<k; i++) {
+		cin >> a[i];
+	}
+	
+	for (int i=0; i<k; i++) {
+		if (!check[a[i]]) {
+			if (v.size() == n) {
+				int last_idx = 0;
+				int pos;
+				for (int num : v) {
+					int idx = INF; 
+					for (int j = i + 1; j<k; j++) {
+						if (num == a[j]) {
+							idx = j;
+							break;
+						}
+					}
+					if (last_idx < idx) {
+						last_idx = idx;
+						pos = num;
+					}
+				}
+				check[pos] = 0;
+				v.erase(find(v.begin(), v.end(), pos));
+				ret++;
+			}
+			v.push_back(a[i]);
+			check[a[i]] = 1;
+		}
+	}
+	
+	cout << ret;
+	
+	
+    return 0;
+}
+
