@@ -1,0 +1,103 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int INF = 987654321;
+
+int n, k, l, dir, x, y, _prev;
+int mat[101][101];
+int visited[101][101];
+int dy[] = {0,1,0,-1};
+int dx[] = {1,0,-1,0};
+vector<pair<int,int>> body;
+pair<int,int> ret;
+int _time, flag;
+char order;
+
+
+
+
+int main(){
+	
+	cin >> n >> k;
+	for (int i=0; i<k; i++) {
+		int a, b;
+		cin >> a >> b;
+		mat[a-1][b-1] = 1;
+	}
+	
+	cin >> l;
+	body.push_back({0,0});
+	visited[0][0] = 1;
+	
+	for (int i=0; i<l; i++) {
+		cin >> _time >> order;
+		for (int j=0; j<_time - _prev; j++) {
+			int ny = y + dy[dir];
+			int nx = x + dx[dir];
+			int f = 0;
+			for (auto it : body) {
+				if (it.first == ny && it.second == nx) f=1;
+			}
+			if (f == 1 || ny < 0 || ny >= n || nx < 0 || nx >= n) {
+				ret = {y,x};
+				flag = 1;
+				break;
+			}
+			visited[ny][nx] = visited[y][x] + 1;
+			if (mat[ny][nx]) {
+				body.push_back({ny,nx});
+				mat[ny][nx] = 0;
+			}
+			else {
+				body.push_back({ny,nx});
+				body.erase(body.begin());
+			}
+			y = ny;
+			x = nx;
+			
+		}
+		
+		if (flag == 1) break;
+		
+		_prev = _time;
+		if (order == 'D') dir++;
+		else dir--;
+		if (dir >= 4) {
+			dir = dir % 4;
+		}
+		else if (dir < 0) {
+			dir += 4;
+		}
+		
+	}
+	
+	if (flag == 0) {
+		while (1) {
+			int ny = y + dy[dir];
+			int nx = x + dx[dir];
+			int f = 0;
+			for (auto it : body) {
+				if (it.first == ny && it.second == nx) f=1;
+			}
+			if (f == 1 || ny < 0 || ny >= n || nx < 0 || nx >= n) {
+				ret = {y,x};
+				flag = 1;
+				break;
+			}
+			visited[ny][nx] = visited[y][x] + 1;
+			if (mat[ny][nx]) body.push_back({ny,nx});
+			else {
+				body.push_back({ny,nx});
+				body.erase(body.begin());
+			}
+			y = ny;
+			x = nx;
+		}
+	}
+	
+
+	cout << visited[ret.first][ret.second];
+	
+
+    return 0;
+}
