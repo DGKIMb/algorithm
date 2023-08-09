@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int INF = 987654321;
+
+int n;
+int a[12];
+vector<int> v;
+int _max = -1000000001;
+int _min = 1000000001;
+
+int cal(int a, int b, int com) {
+	if (com == 1) return a + b;
+	else if (com == 2) return a - b;
+	else if (com == 3) return a * b;
+	else if (com == 4) return a / b;
+	return 0;
+}
+
+int main(){
+	
+	cin >> n;
+	for (int i=0; i<n; i++) {
+		cin >> a[i];
+	}
+	
+	for (int i=1; i<=4; i++) {
+		int temp;
+		cin >> temp;
+		for (int j=0; j<temp; j++) {
+			v.push_back(i);
+		}
+	}
+
+	do {
+		int sum = a[0];
+		for (int i=0; i<v.size(); i++) {
+			sum = cal(sum, a[i+1], v[i]);
+		}
+		_max = max(_max, sum);
+		_min = min(_min, sum);
+	} while (next_permutation(v.begin(), v.end()));
+	
+	cout << _max << "\n" << _min << "\n";
+	
+
+	
+    return 0;
+}
