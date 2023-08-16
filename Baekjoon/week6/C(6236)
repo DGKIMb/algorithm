@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int INF = 987654321;
+
+ll n,m,a[100001];
+ll ret = 1999999999,l,r, maxValue;
+
+ll check(ll mid) {
+	ll cnt=1;
+	ll temp = mid;
+	for (int i=0; i<n; i++) {
+		temp -= a[i];
+		if (temp < 0) {
+			temp = mid;
+			temp -= a[i];
+			cnt++;
+		}
+	}
+	
+	return cnt;
+}
+
+int main() {
+	
+	cin >> n >> m;
+	for (int i=0; i<n; i++) {
+		cin >> a[i];
+		r += a[i];
+		maxValue = max(maxValue, a[i]);
+	}
+	
+	ll mid = 0;
+	
+	while (l<=r) {
+		mid = (l+r)/2;
+		if (mid < maxValue) {
+			l = mid + 1;
+			continue;
+		}
+		int cnt = check(mid);
+		if (cnt <= m) {
+			ret = min(ret, mid);
+			r = mid-1;
+		}
+		else l = mid+1;
+		
+	}
+	
+	cout << ret;
+	
+    return 0;
+}
