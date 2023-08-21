@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int INF = 987654321;
+
+ll n,m,sum;
+ll a[1000001];
+ll l,r=10000000000;
+ll ret;
+
+int main() {
+	
+	cin >> n >> m;
+	for (int i=0; i<n; i++) cin >> a[i], sum += a[i];
+	l=1;
+	
+	while (l<=r) {
+		ll mid = (l+r)/2;
+		ll cnt = 0;
+		for (int i=0; i<n; i++) {
+			cnt += a[i]/mid;
+		}
+		if (m <= cnt) {
+			l = mid+1;
+			ret = mid;
+		}
+		else if (m > cnt) r = mid-1;
+	}
+	
+	cout << sum - m*ret;
+
+	
+    return 0;
+}
